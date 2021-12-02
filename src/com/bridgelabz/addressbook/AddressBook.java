@@ -1,14 +1,19 @@
 package com.bridgelabz.addressbook;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class AddressBook {
-   
+
+    /*
+   Declaring The Add Contact Method
+   And Entering The Contact Details By Using Scanner Class
+   And Printing The Contact Details Of Person
+    */
+
+    ContactDetails person = new ContactDetails();
     List<ContactDetails> contactDetailsList = new ArrayList<>();
-    Scanner scanner = new Scanner(System.in);
     public void addContact() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the number of contacts you want to enter");
         int number = scanner.nextInt();
         for (int i = 0; i < number; i++) {
@@ -17,7 +22,7 @@ public class AddressBook {
         }
     }
     public void writeContact() {
-        ContactDetails person = new ContactDetails();
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter First Name : ");
         String firstName = scanner.next();
         System.out.println("Enter Last Name : ");
@@ -36,16 +41,24 @@ public class AddressBook {
         String emailId = scanner.next();
         person = new ContactDetails(firstName, lastName, address, city, state, zipCode, mobileNumber, emailId);
         contactDetailsList.add(person);
-        printContact();
     }
+
+    /*
+    Declaring The Edit Contact Method
+    TO Edit The Details Of Contact
+    The Details Of Contact Edit By Using FirstName
+    If First Name Is Match The Contact Will Edit
+    */
 
     public void editContact() {
         System.out.println("Enter the first name of person to edit contact");
+        Scanner scanner = new Scanner(System.in);
         String editName = scanner.next();
         boolean edited = false;
         for (int i = 0; i < contactDetailsList.size(); i++) {
             String name = contactDetailsList.get(i).getFirstName();
             if (name.equalsIgnoreCase(editName)) {
+                contactDetailsList.remove(person);
                 writeContact();
                 edited = true;
                 break;
@@ -56,8 +69,16 @@ public class AddressBook {
         }
     }
 
+    /*
+    Declaring Delete Contact Method
+    TO delete The Details Of Contact
+    The Details Of Contact Delete By Using FirstName
+    If First Name Is Match Then Contact Will Delete
+    */
+
     public void deleteContact() {
         System.out.println("Enter the first name of person to delete contact");
+        Scanner scanner = new Scanner(System.in);
         String deleteName = scanner.next();
         int i = 0;
         for ( ;i < contactDetailsList.size(); i++) {
@@ -69,23 +90,8 @@ public class AddressBook {
         if (i < contactDetailsList.size()) {
             contactDetailsList.remove(i);
             System.out.println("Contact Deleted");
-            System.out.println("Remaining contacts in the book isgit");
-            printContact();
         }else {
             System.out.println("Contact not find");
-        }
-
-    }
-    public void printContact() {
-        for (int i = 0; i < contactDetailsList.size(); i++) {
-            System.out.println("Contact Details");
-            System.out.println("Name         : " + contactDetailsList.get(i).getFirstName()+ " " + contactDetailsList.get(i).getLastName() + "\n"
-                             + "Address      : " + contactDetailsList.get(i).getAddress()   + "\n"
-                             + "City         : " + contactDetailsList.get(i).getCity()      + "\n"
-                             + "State        : " + contactDetailsList.get(i).getState()     + "\n"
-                             + "ZipCode      : " + contactDetailsList.get(i).getZipCode()   + "\n"
-                             + "MobileNumber : " + contactDetailsList.get(i).getMobileNo()  + "\n"
-                             + "EmailId      : " + contactDetailsList.get(i).getEmailId()   + "\n");
         }
     }
 }
