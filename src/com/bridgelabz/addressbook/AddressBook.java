@@ -1,54 +1,153 @@
 package com.bridgelabz.addressbook;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddressBook {
-
-    /*
-   Declaring The Add Contact Method
-   And Entering The Contact Details By Using Scanner Class
-   And Printing The Contact Details Of Person
-    */
-
+	
+	String firstName;
+	String lastName;
+	String address;
+	String city;
+	String state;
+	String zipCode;
+	String mobileNumber;
+	String emailId;
+	
+	final String fNameregex = "^[A-Za-z]*$";
+	final String lNameRegex = "^[A-Za-z]*$";
+	final String addressRegex = "^[A-Z0-9a-z]*$";
+	final String cityRegex = "^[A-Za-z]*$";
+	final String stateRegex = "^[A-Za-z]*$";
+	final String zipCodeRegex = "^[1-9]{6}$";
+	final String mNumRegex = "^([+])?([91]{2})?[\\s]?[6-9][0-9]{9}$";
+	final String emailRegex = "^[A-Za-z0-9]+([.+-_][0-9a-zA-Z])*[@]([0-9a-zA-Z])+[.][a-zA-z]{2,3}([.][a-zA-z]{2,3})?$";
+	
+	
     ContactDetails person = new ContactDetails();
     List<ContactDetails> contactDetailsList = new ArrayList<>();
+    
+    
     public void addContact() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the number of contacts you want to enter");
         int number = scanner.nextInt();
         for (int i = 0; i < number; i++) {
-            System.out.println("Enter the contact details of person ");
-            writeContact();
+            System.out.println("Enter the first Name the Person");
+            String fName = scanner.next();
+            if (fName.equals(person.getFirstName())) {
+            	System.out.println("Person with First Name already exists.");
+            	
+            }else {
+            	System.out.println("Enter the contact detais of the Person");
+            	writeContact();
+            	System.out.println("Contact details enterd"); 
+            }   
         }
     }
+    
     public void writeContact() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter First Name : ");
-        String firstName = scanner.next();
+        while(true) {
+        	firstName = scanner.nextLine();
+        	Pattern p = Pattern.compile(fNameregex);
+        	Matcher m = p.matcher(firstName);
+        	if (m.find() && m.group().equals(firstName)) {
+        		System.out.println("valid");
+        		break;
+        	}else
+        		System.out.println("invalid");
+        }
+        
         System.out.println("Enter Last Name : ");
-        String lastName = scanner.next();
+        while (true) {
+        	lastName = scanner.nextLine();
+        	Pattern p = Pattern.compile(lNameRegex);
+        	Matcher m = p.matcher(lastName);
+        	if (m.find() && m.group().equals(lastName)) {
+        		System.out.println("valid");
+        		break;
+        	}else
+        		System.out.println("invalid");
+        }
+        
         System.out.println("Enter Address : ");
-        String address = scanner.next();
+        while(true) {
+        	address = scanner.nextLine();
+        	Pattern p = Pattern.compile(addressRegex);
+        	Matcher m = p.matcher(address);
+        	if (m.find() && m.group().equals(address)) {
+        		System.out.println("valid");
+        		break;
+        	}else
+        		System.out.println("invalid");
+        }
+        
         System.out.println("Enter City : ");
-        String city = scanner.next();
+        while (true) {
+        	city = scanner.nextLine();
+        	Pattern p = Pattern.compile(cityRegex);
+        	Matcher m = p.matcher(city);
+        	if (m.find() && m.group().equals(city)) {
+        		System.out.println("valid");
+        		break;
+        	}else
+        		System.out.println("invalid");
+        }
+        
         System.out.println("Enter State : ");
-        String state = scanner.next();
+        while (true) {
+            state = scanner.nextLine();
+        	Pattern p = Pattern.compile(stateRegex);
+        	Matcher m = p.matcher(state);
+        	if (m.find() && m.group().equals(state)) {
+        		System.out.println("valid");
+        		break;
+        	}else
+        		System.out.println("invalid");
+        }
+    
         System.out.println("Enter ZipCode : ");
-        int zipCode = scanner.nextInt();
+        while (true) {
+        	zipCode = scanner.nextLine();
+        	Pattern p = Pattern.compile(zipCodeRegex);
+        	Matcher m = p.matcher(zipCode);
+        	if (m.find() && m.group().equals(zipCode)) {
+        		System.out.println("valid");
+        		break;
+        	}else
+        		System.out.println("invalid");
+        }
+        
         System.out.println("Enter Mobile Number : ");
-        long mobileNumber = scanner.nextLong();
+        while (true) {
+        	mobileNumber = scanner.nextLine();
+        	Pattern p = Pattern.compile(mNumRegex);
+        	Matcher m = p.matcher(mobileNumber);
+        	if (m.find() && m.group().equals(mobileNumber)) {
+        		System.out.println("valid");
+        		break;
+        	}else
+        		System.out.println("invalid");
+        }
+        
         System.out.println("Enter EmailId : ");
-        String emailId = scanner.next();
+        while (true) {
+        	emailId = scanner.nextLine();
+        	Pattern p = Pattern.compile(emailRegex);
+        	Matcher m = p.matcher(emailId);
+        	if (m.find() && m.group().equals(emailId)) {
+        		System.out.println("valid");
+        		break;
+        	}else
+        		System.out.println("invalid");
+        }
+        
         person = new ContactDetails(firstName, lastName, address, city, state, zipCode, mobileNumber, emailId);
         contactDetailsList.add(person);
     }
-
-    /*
-    Declaring The Edit Contact Method
-    TO Edit The Details Of Contact
-    The Details Of Contact Edit By Using FirstName
-    If First Name Is Match The Contact Will Edit
-    */
 
     public void editContact() {
         System.out.println("Enter the first name of person to edit contact");
@@ -68,14 +167,7 @@ public class AddressBook {
             System.out.println("enter name is incorrect");
         }
     }
-
-    /*
-    Declaring Delete Contact Method
-    TO delete The Details Of Contact
-    The Details Of Contact Delete By Using FirstName
-    If First Name Is Match Then Contact Will Delete
-    */
-
+    
     public void deleteContact() {
         System.out.println("Enter the first name of person to delete contact");
         Scanner scanner = new Scanner(System.in);
