@@ -186,4 +186,15 @@ public class AddressBook {
             System.out.println("Contact not find");
         }
     }
+
+	public boolean person(String place) {
+		for (int i = 0; i < contactDetailsList.size();i++) {
+			String city = contactDetailsList.get(i).getCity();
+			String state = contactDetailsList.get(i).getState();
+			if (city.equalsIgnoreCase(place) || state.equalsIgnoreCase(place)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
