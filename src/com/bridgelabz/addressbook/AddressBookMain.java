@@ -37,6 +37,7 @@ public class AddressBookMain {
                     break;
                 case 8:
                 	obj.searchPerson();
+                	break;
                 case 0:
                     System.exit(0);
                     break;
