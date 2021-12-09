@@ -14,6 +14,7 @@ public class AddressBook {
 	String zipCode;
 	String mobileNumber;
 	String emailId;
+	int count = 0;
 	
 	final String fNameregex = "^[A-Za-z]*$";
 	final String lNameRegex = "^[A-Za-z]*$";
@@ -192,6 +193,7 @@ public class AddressBook {
 			String city = contactDetailsList.get(i).getCity();
 			String state = contactDetailsList.get(i).getState();
 			if (city.equalsIgnoreCase(place) || state.equalsIgnoreCase(place)) {
+				count++;
 				return true;
 			}
 		}
