@@ -30,12 +30,12 @@ public class AddressBook {
 	List<ContactDetails> contactDetailsList = new ArrayList<>();
 
 	public void addContact() {
-		Scanner scanner = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the number of contacts you want to enter");
-		int number = scanner.nextInt();
+		int number = sc.nextInt();
 		for (int i = 0; i < number; i++) {
 			System.out.println("Enter the first Name the Person");
-			String fName = scanner.next();
+			String fName = sc.next();
 			if (fName.equals(person.getFirstName())) {
 				System.out.println("Person with First Name already exists.");
 
@@ -53,11 +53,11 @@ public class AddressBook {
 			Matcher m = p.matcher(data);
 			return m.find() && m.group().equals(data);
 		};
-		Scanner scanner = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter First Name : ");
 
 		while (true) {
-			firstName = scanner.nextLine();
+			firstName = sc.nextLine();
 			if (ab.userValidation(firstName, fNameregex)) {
 				System.out.println("valid");
 				break;
@@ -67,7 +67,7 @@ public class AddressBook {
 
 		System.out.println("Enter Last Name : ");
 		while (true) {
-			lastName = scanner.nextLine();
+			lastName = sc.nextLine();
 			if (ab.userValidation(lastName, lNameRegex)) {
 				System.out.println("valid");
 				break;
@@ -77,7 +77,7 @@ public class AddressBook {
 
 		System.out.println("Enter Address : ");
 		while (true) {
-			address = scanner.nextLine();
+			address = sc.nextLine();
 			if (ab.userValidation(address, addressRegex)) {
 				System.out.println("valid");
 				break;
@@ -87,7 +87,7 @@ public class AddressBook {
 
 		System.out.println("Enter City : ");
 		while (true) {
-			city = scanner.nextLine();
+			city = sc.nextLine();
 			if (ab.userValidation(city, cityRegex)) {
 				System.out.println("valid");
 				break;
@@ -97,7 +97,7 @@ public class AddressBook {
 
 		System.out.println("Enter State : ");
 		while (true) {
-			state = scanner.nextLine();
+			state = sc.nextLine();
 			if (ab.userValidation(state, stateRegex)) {
 				System.out.println("valid");
 				break;
@@ -107,7 +107,7 @@ public class AddressBook {
 
 		System.out.println("Enter ZipCode : ");
 		while (true) {
-			zipCode = scanner.nextLine();
+			zipCode = sc.nextLine();
 			if (ab.userValidation(zipCode, zipCodeRegex)) {
 				System.out.println("valid");
 				break;
@@ -117,7 +117,7 @@ public class AddressBook {
 
 		System.out.println("Enter Mobile Number : ");
 		while (true) {
-			mobileNumber = scanner.nextLine();
+			mobileNumber = sc.nextLine();
 			if (ab.userValidation(mobileNumber, mNumRegex)) {
 				System.out.println("valid");
 				break;
@@ -127,7 +127,7 @@ public class AddressBook {
 
 		System.out.println("Enter EmailId : ");
 		while (true) {
-			emailId = scanner.nextLine();
+			emailId = sc.nextLine();
 			if (ab.userValidation(emailId, emailRegex)) {
 				System.out.println("valid");
 				break;
@@ -179,7 +179,13 @@ public class AddressBook {
 		list.stream().sorted((g1, g2) -> ((String) g1.getCity()).compareTo(g2.getCity()))
 				.forEach(contact -> System.out.println(contact.getFirstName() + " " + contact.getLastName()));
 	}
-
+	
+	public void sortbyZip() {
+		List<ContactDetails> list = contactDetailsList.stream().collect(Collectors.toList());
+		list.stream().sorted((g1, g2) -> ((String) g1.getZipCode()).compareTo(g2.getZipCode()))
+				.forEach(contact -> System.out.println(contact.getFirstName() + " " + contact.getLastName()));
+	}
+	
 	public void editContact() {
 		System.out.println("Enter the first name of person to edit contact");
 		Scanner sc = new Scanner(System.in);
