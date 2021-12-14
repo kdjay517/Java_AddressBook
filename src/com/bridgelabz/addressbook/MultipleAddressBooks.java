@@ -1,9 +1,16 @@
 package com.bridgelabz.addressbook;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MultipleAddressBooks {
 	Map<String, AddressBook> addressBookMap = new HashMap<>();
+	public static String FILE_NAME = "Data/contactdetails.txt";
 
 	public void addAddressBook() {
 		System.out.println("Enter Name of new Address Book: ");
@@ -75,6 +82,38 @@ public class MultipleAddressBooks {
 			System.out.println(entry.getValue().contactDetailsList);
 		}
 		System.out.println(" ");
+	}
+
+	public void toWriteIntoFile() {
+		List<AddressBook>list =  addressBookMap.entrySet().stream()
+								 .map(Map.Entry::getValue)
+								 .collect(Collectors.toList());
+		PrintWriter pw = null;
+		try {
+			pw = new PrintWriter(FILE_NAME);
+			for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {
+				pw.println("The contacts in the Book of < " + entry.getKey() + " > are!...");
+				for(AddressBook name:list) {
+					pw.println("FirstName:"+name.firstName+"\n"
+							+"LastName:"+name.lastName+"\n"
+							+"Address:"+name.address+"\n"
+							+"City:"+name.city+"\n"
+							+"State:"+name.state+"\n"
+							+"MobileNumber:"+name.mobileNumber+"\n"
+							+"ZipCode:"+name.zipCode+"\n"
+							+"emailId:"+name.emailId+"\n");
+				}
+				pw.flush();
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			pw.close();
+		}
+		
 	}
 
 }

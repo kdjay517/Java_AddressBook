@@ -9,7 +9,8 @@ public class AddressBookMain {
         AddressBook obj2 = new AddressBook();
         while (true) {
             System.out.println("Enter \n 1. To add The new AddressBook\n 2. To do AddressBook functions\n 3. To delete the AddressBook\n " +
-                               "4. To Print the AddressBook\n 5. To Print the contacts in AddressBook\n 6. To book options\n 0. to exit");
+                               "4. To Print the AddressBook\n 5. To Print the contacts in AddressBook\n 6. To book options\n 7. To Write into "
+                               + "File \n 0. to exit");
             Scanner sc = new Scanner(System.in);
             int choice = sc.nextInt();
             switch (choice) {
@@ -31,6 +32,9 @@ public class AddressBookMain {
                 case 6:
                     obj2.viewByOptions();
                     break;
+                case 7:
+                	obj1.toWriteIntoFile();
+                	break;
                 case 0:
                     System.exit(0);
                     break;
