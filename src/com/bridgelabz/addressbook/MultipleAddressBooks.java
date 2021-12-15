@@ -83,37 +83,29 @@ public class MultipleAddressBooks {
 		}
 		System.out.println(" ");
 	}
-
+	
 	public void toWriteIntoFile() {
-		List<AddressBook>list =  addressBookMap.entrySet().stream()
-								 .map(Map.Entry::getValue)
-								 .collect(Collectors.toList());
 		PrintWriter pw = null;
 		try {
 			pw = new PrintWriter(FILE_NAME);
 			for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {
 				pw.println("The contacts in the Book of < " + entry.getKey() + " > are!...");
-				for(AddressBook name:list) {
-					pw.println("FirstName:"+name.firstName+"\n"
-							+"LastName:"+name.lastName+"\n"
-							+"Address:"+name.address+"\n"
-							+"City:"+name.city+"\n"
-							+"State:"+name.state+"\n"
-							+"MobileNumber:"+name.mobileNumber+"\n"
-							+"ZipCode:"+name.zipCode+"\n"
-							+"emailId:"+name.emailId+"\n");
-				}
-				pw.flush();
+				pw.println("FirstName:"+entry.getValue().firstName
+						+"\nLastName:"+entry.getValue().lastName
+						+"\nAddress:"+entry.getValue().address
+						+"\nCity:"+entry.getValue().city
+						+"\nState:"+entry.getValue().state
+						+"\nZipcode:"+entry.getValue().zipCode
+						+"\nMobileNumber:"+entry.getValue().mobileNumber
+						+"\nEmailId:"+entry.getValue().emailId);
 			}
+			pw.flush();
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		finally {
+		}finally {
 			pw.close();
 		}
-		
 	}
 
 }
