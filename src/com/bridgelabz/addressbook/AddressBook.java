@@ -1,9 +1,17 @@
 package com.bridgelabz.addressbook;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class AddressBook {
 
@@ -135,6 +143,27 @@ public class AddressBook {
 				System.out.println("invalid");
 		}
 
+		person = new ContactDetails(firstName, lastName, address, city, state, zipCode, mobileNumber, emailId);
+		contactDetailsList.add(person);
+	}
+	
+	public void addContactbyJSONFile() throws IOException, ParseException {
+		
+		JSONParser jsonparser = new JSONParser();
+		BufferedReader bufferedreader = null;
+		bufferedreader = new BufferedReader(new FileReader(".\\JSONFiles\\contact_details.json"));
+		Object obj = jsonparser.parse(bufferedreader);
+		JSONObject contactDetails = (JSONObject)obj;
+		String firstName = (String)contactDetails.get("firstName");
+		String lastName = (String)contactDetails.get("lastName");
+		String address = (String)contactDetails.get("address");
+		String city = (String)contactDetails.get("city");
+		String state = (String)contactDetails.get("state");
+		String zipCode = (String)contactDetails.get("zipCode");
+		String mobileNumber = (String)contactDetails.get("mobileNumber");
+		String emailId = (String)contactDetails.get("emailId");
+		bufferedreader.close();
+		
 		person = new ContactDetails(firstName, lastName, address, city, state, zipCode, mobileNumber, emailId);
 		contactDetailsList.add(person);
 	}

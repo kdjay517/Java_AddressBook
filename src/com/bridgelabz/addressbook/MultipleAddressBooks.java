@@ -8,10 +8,15 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 public class MultipleAddressBooks {
 	Map<String, AddressBook> addressBookMap = new HashMap<>();
-	public static String FILE_NAME = "Data/contactdetails.txt";
-
+	public final static String FILE_NAME = "Data/contactdetails.txt";
+	public final static String JSON_FILE = "JSONFiles/output.json";
+	
 	public void addAddressBook() {
 		System.out.println("Enter Name of new Address Book: ");
 		Scanner sc = new Scanner(System.in);
@@ -30,7 +35,7 @@ public class MultipleAddressBooks {
 		}
 	}
 
-	public void addressBookFunctions() {
+	public void addressBookFunctions() throws IOException, ParseException {
 		System.out.println("Enter the name of Address book to add, edit or delete the contact.");
 		Scanner sc = new Scanner(System.in);
 		String bookName = sc.nextLine();
@@ -38,19 +43,22 @@ public class MultipleAddressBooks {
 			addressBookMap.get(bookName);
 			System.out.println("Enter book is present choose the options below to do certain function");
 			while (true) {
-				System.out.println("Enter\n 1. add Contact\n 2. edit contact\n 3. delete contact\n 4. previous menu");
+				System.out.println("Enter\n 1. add Contact\n 2. add Contact by JSON \n 3. edit contact \n 4. delete contact\n 5. previous menu");
 				int choice = sc.nextInt();
 				switch (choice) {
 				case 1:
 					addressBookMap.get(bookName).addContact();
 					break;
 				case 2:
-					addressBookMap.get(bookName).editContact();
+					addressBookMap.get(bookName).addContactbyJSONFile();
 					break;
 				case 3:
-					addressBookMap.get(bookName).deleteContact();
+					addressBookMap.get(bookName).editContact();
 					break;
 				case 4:
+					addressBookMap.get(bookName).deleteContact();
+					break;
+				case 5:
 					return;
 				default:
 					System.out.println("Entered choice is incorrect!.. please enter correct choice");
@@ -84,7 +92,7 @@ public class MultipleAddressBooks {
 		System.out.println(" ");
 	}
 	
-	public void toWriteIntoFile() {
+	public void toWriteIntoTextFile() {
 		PrintWriter pw = null;
 		try {
 			pw = new PrintWriter(FILE_NAME);
@@ -106,6 +114,35 @@ public class MultipleAddressBooks {
 		}finally {
 			pw.close();
 		}
+	}
+	
+	@SuppressWarnings({ "unchecked", "unused" })
+	public void toWriteIntoJASONFile() {
+		JSONParser jsonparser = new JSONParser();
+		PrintWriter pw = null;
+		JSONObject obj = new JSONObject();
+		
+		try {
+			pw = new PrintWriter(JSON_FILE);
+			for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {
+				obj.put("FirstName:", entry.getValue().firstName);
+				obj.put("LastName:", entry.getValue().lastName);
+				obj.put("Address:", entry.getValue().address);
+				obj.put("City:", entry.getValue().city);
+				obj.put("State:", entry.getValue().state);
+				obj.put("zipcode:", entry.getValue().zipCode);
+				obj.put("mobileNumber:", entry.getValue().mobileNumber);
+				obj.put("EmailId:", entry.getValue().emailId);
+			}
+			pw.println(obj.toJSONString());
+			pw.flush();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}finally {
+			pw.close();
+		}
+		
 	}
 
 }
