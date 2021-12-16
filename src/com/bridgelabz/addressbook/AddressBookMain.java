@@ -13,7 +13,7 @@ public class AddressBookMain {
         while (true) {
             System.out.println("Enter \n 1. To add The new AddressBook\n 2. To do AddressBook functions\n 3. To delete the AddressBook\n " +
                                "4. To Print the AddressBook\n 5. To Print the contacts in AddressBook\n 6. To book options\n "
-                               + "7. To Write into File \n 8. To Write into JSONFile \n 0. to exit");
+                               + "7. To Write into File \n 8. To Write into JSONFile \n 9. To Write into CSVFile\n 0. to exit");
             Scanner sc = new Scanner(System.in);
             int choice = sc.nextInt();
             switch (choice) {
@@ -40,6 +40,9 @@ public class AddressBookMain {
                 	break;
                 case 8:
                 	obj1.toWriteIntoJASONFile();
+                	break;
+                case 9:
+                	obj1.toWriteIntoCSVFile();
                 	break;
                 case 0:
                     System.exit(0);
