@@ -1,32 +1,9 @@
-The contacts in the Book of < d > are!...FirstName:dhanujaya
-LastName:kummari
-Address:brp
-City:prp
-State:ap
-MobileNumber:8978041840
-ZipCode:515134
-emailId:kdjay517@gmail.com
+The contacts in the Book of < d > are!...
 FirstName:null
 LastName:null
 Address:null
 City:null
 State:null
+Zipcode:null
 MobileNumber:null
-ZipCode:null
-emailId:null
-The contacts in the Book of < j > are!...FirstName:dhanujaya
-LastName:kummari
-Address:brp
-City:prp
-State:ap
-MobileNumber:8978041840
-ZipCode:515134
-emailId:kdjay517@gmail.com
-FirstName:null
-LastName:null
-Address:null
-City:null
-State:null
-MobileNumber:null
-ZipCode:null
-emailId:null
+EmailId:null
